@@ -10,8 +10,7 @@ engine: object = create_engine(DATABASE_URL)
 session_local: object = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base: object = declarative_base()
 
-#FIXME: add return type.
-def get_db():
+def get_db() -> object:
     database: object = session_local()
     try:
         yield database

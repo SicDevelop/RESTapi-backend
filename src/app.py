@@ -13,7 +13,3 @@ Base.metadata.create_all(bind=engine)
 app: object = FastAPI()
 app.include_router(public.router)
 app.include_router(admin.router)
-
-@app.get('/')
-async def home():
-    return {'content': 'welcome to home'}
