@@ -22,7 +22,7 @@ passlib==1.7.4
 psycopg2-binary==2.9.5
 pyasn1==0.4.8
 pycparser==2.21
-pydantic==1.10.2
+pydantic==1.10.4
 PyJWT==2.6.0
 python-dotenv==0.21.0
 python-jose==3.3.0
