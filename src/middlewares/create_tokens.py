@@ -1,8 +1,6 @@
-
 import time
 import jwt
 from core.config import server_settings
-
 
 async def token_response(token: str, refresh_token) -> dict:
     return {

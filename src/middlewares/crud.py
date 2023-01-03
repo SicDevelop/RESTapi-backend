@@ -5,8 +5,6 @@ from models.pydantic_models import Teachers, Admins, Groups, Shedules
 from models.abstact_models import Teacher, Group, Shedule
 from typing import Union
 
-
-
 # PUBLIC
 async def get_teachers(db: Session) -> Union[Teachers, None]:
     try:
@@ -15,14 +13,12 @@ async def get_teachers(db: Session) -> Union[Teachers, None]:
     except Exception as ex:
         return {'error', ex}
 
-
 async def get_groups(db: Session) -> Union[Groups, None]:
     try:
         record = db.query(Groups).all()
         return record
     except Exception as ex:
         return {'error', ex}
-
 
 # ADMIN
 #FIXME: remove {} from function to another file.

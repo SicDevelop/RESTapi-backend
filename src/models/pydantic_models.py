@@ -11,6 +11,7 @@ class Teachers(Base):
     last_name = Column(String)
     email = Column(String)
 
+
 #FIXME: convert id to uuid.
 #FIXME: add unique to username
 class Admins(Base):
@@ -20,12 +21,14 @@ class Admins(Base):
     username = Column(String)
     hashed_password = Column(String)
 
+
 class Groups(Base):
     __tablename__ = 'Groups'
 
     id = Column(Integer, primary_key=True)
     short_name = Column(String)
     full_name = Column(String)
+
 
 class Shedules(Base):
     __tablename__ = 'Shedules'

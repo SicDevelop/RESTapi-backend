@@ -9,18 +9,15 @@ from core.security import get_password_hash, verify_password
 from middlewares.jwt_bearer import jwtBearer
 from middlewares.create_tokens import signJWT, decodeJWT
 
-
 router = APIRouter(
     prefix = '/api/admin',
     tags = ['API for administrators']
 )
 
-
 @router.post('/register')
 async def register(admin: Admin, db: Session = Depends(get_db)) -> dict:
     hashed_password: str = get_password_hash(admin.password)
     return await crud.add_admin(username=admin.username, hashed_password=hashed_password, db=db)
-
 
 @router.post('/login')
 async def login(admin: Admin, db: Session = Depends(get_db)) -> dict:
@@ -31,11 +28,9 @@ async def login(admin: Admin, db: Session = Depends(get_db)) -> dict:
         return {'error': 'password incorrect'}
     return await signJWT(admin.username)
 
-    
 @router.post('/view',dependencies=[Depends(jwtBearer())])
 async def view(admin: Admin):
     return {"hello!"}
-
 
 @router.post('/refresh_token')
 async def refresh(rt: RefreshToken) -> dict:

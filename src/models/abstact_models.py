@@ -19,12 +19,15 @@ class AdminInDB(BaseModel):
     username: Union[str, None] = None
     hashed_password: Union[str, None] = None
 
+
 class RefreshToken(BaseModel):
     refresh_token: str
+
 
 class Group(BaseModel):
     short_name: str
     full_name: str
+
 
 class Shedule(BaseModel):
     para_id: int
