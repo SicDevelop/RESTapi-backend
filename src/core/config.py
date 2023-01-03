@@ -2,8 +2,7 @@
 # -._._.-._._.-._._.-._._-._._.-._._._->
 
 from dotenv import load_dotenv
-from pydantic import BaseSettings, BaseModel
-
+from pydantic import BaseSettings
 
 load_dotenv()
 
