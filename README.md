@@ -36,3 +36,11 @@ user@macos#: make run
 `/api/public/get_shedule` - получение расписания по названию(?) группы (сейчас не работает)
 
 [Swagger](https://app.swaggerhub.com/apis/blcklptn/fast-api/0.1.0)
+
+
+## TODO
+
+ - [ ] Оставить комментарии к коду
+ - [ ] Подробная документация к коду
+ - [ ] Роутер ```/api/```
+ - [ ] Использовать ```poetry```
