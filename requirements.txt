@@ -11,7 +11,7 @@ cryptography==38.0.4
 dotenv-python==0.0.1
 ecdsa==0.18.0
 fastapi==0.88.0
-greenlet==2.0.1
+greenlet==2.0.2
 h11==0.14.0
 idna==3.4
 itypes==1.2.0
