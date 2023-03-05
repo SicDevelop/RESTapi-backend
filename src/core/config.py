@@ -1,10 +1,9 @@
-# All configuration variables from environment here.
-# -._._.-._._.-._._.-._._-._._.-._._._->
-
-from dotenv import load_dotenv
 from pydantic import BaseSettings
-
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except:
+    print('Cannot load dotenv')
 
 class DatabaseSettings(BaseSettings):
     DB_HOST: str
@@ -12,11 +11,12 @@ class DatabaseSettings(BaseSettings):
     DB_USERNAME: str
     DB_PASSWORD: str
 
+
 class ServerSettings(BaseSettings):
     ACCESS_SECRET_KEY: str
     REFRESH_SECRET_KEY: str
-    ACCESS_TOKEN_EXPIRE_MINUTES: int
-    REFRESH_TOKEN_EXPIRE_MINUTES: int
+    ACCESS_EXPIRE_MINUTES: str
+    REFRESH_EXPIRE_MINUTES: str
 
 db_settings = DatabaseSettings()
 server_settings = ServerSettings()

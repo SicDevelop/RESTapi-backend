@@ -1,83 +1,63 @@
-# *0.__.0*. This is a space.... *.0.
-
 from sqlalchemy.orm import Session
 from models.pydantic_models import Teachers, Admins, Groups, Shedules
-from models.abstact_models import Teacher, Group, Shedule
+from models.abstract_models import Teacher, Group, Shedule
+from .error_handler import error_handler
 from typing import Union
 
-# PUBLIC
+@error_handler
 async def get_teachers(db: Session) -> Union[Teachers, None]:
-    try:
-        record = db.query(Teachers).all()
-        return record
-    except Exception as ex:
-        return {'error', ex}
+    record = db.query(Teachers).all()
+    return record
 
+@error_handler
 async def get_groups(db: Session) -> Union[Groups, None]:
-    try:
-        record = db.query(Groups).all()
-        return record
-    except Exception as ex:
-        return {'error', ex}
+    record = db.query(Groups).all()
+    return record
 
-# ADMIN
-#FIXME: remove {} from function to another file.
+@error_handler
 async def add_admin(username: str, hashed_password: str, db: Session) -> None:
-    try:
-        admin = Admins(
-            username=username,
-            hashed_password=hashed_password
-        )
-        db.add(admin)
-        db.commit()
-        return {'content': 'Done!'}
-    except Exception as ex:
-        return {'error': ex}
+    admin = Admins(
+        username = username,
+        hashed_password = hashed_password
+    )
 
-async def check_admin(username: str, db: Session) -> Admins:
-    try:
-        admin = db.query(Admins).filter(Admins.username == username).first()
-        return admin
-    except:
-        return
+    db.add(admin)
+    db.commit()
 
+@error_handler
 async def add_teacher(teacher: Teacher, db: Session) -> dict:
-    try:
-        new_teacher = Teachers(
-            first_name = teacher.first_name,
-            middle_name = teacher.middle_name,
-            last_name = teacher.last_name,
-            email = teacher.email
-        )
+    new_teacher = Teachers(
+        first_name = teacher.first_name,
+        middle_name = teacher.middle_name,
+        last_name = teacher.last_name,
+        email = teacher.email
+    )
+    
+    db.add(new_teacher)
+    db.commit()
 
-        db.add(new_teacher)
-        db.commit()
-        return {'content': 'Done!'}
-    except Exception as ex:
-        return {'error': ex}
+@error_handler
+async def check_admin(username: str, db: Session) -> Admins:
+    admin = db.query(Admins).filter(Admins.username == username).first()
+    return admin
 
+@error_handler
 async def add_group(group: Group, db: Session) -> dict:
-    try:
-        new_group = Groups(
-            short_name = group.short_name,
-            full_name = group.full_name
-        )
+    new_group = Groups(
+        short_name = group.short_name,
+        full_name = group.full_name
+    )
 
-        db.add(new_group)
-        db.commit()
-        return {'content': 'Done!'}
-    except Exception as ex:
-        return {'error': ex}
+    db.add(new_group)
+    db.commit()
 
+@error_handler
 async def add_shedule(shedule: Shedule, db: Session) -> dict:
-    try:
-        new_shedule = Shedules(
-            para_id = shedule.para_id,
-            group_id = shedule.group_id
-        )
+    new_shedule = Shedules(
+        para_id = shedule.para_id,
+        group_id = shedule.group_id
+    )
+    
+    db.add(new_shedule)
+    db.commit()
 
-        db.add(new_shedule)
-        db.commit()
-        return {'content': 'Done!'}
-    except Exception as ex:
-        return {'error': ex}
