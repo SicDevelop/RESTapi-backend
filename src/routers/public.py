@@ -21,6 +21,7 @@ async def login(admin: Admin, db: Session = Depends(get_db)) -> dict:
         return responses.ERROR_RESPONSES['access_denied']
     return await signJWT(admin.username)
 
+# REMOVE AT PROD.
 @router.post('/register')
 async def register(admin: Admin, db: Session = Depends(get_db)) -> dict:
     """ Создание тестового админа. Временная функция. """
