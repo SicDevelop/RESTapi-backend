@@ -53,10 +53,7 @@ async def add_group(group: Group, db: Session) -> dict:
 
 @error_handler
 async def add_shedule(shedule: Shedule, db: Session) -> dict:
-    new_shedule = Shedules(
-        para_id = shedule.para_id,
-        group_id = shedule.group_id
-    )
+    new_shedule = Shedules(**shedule)
     
     db.add(new_shedule)
     db.commit()
