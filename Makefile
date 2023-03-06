@@ -23,6 +23,8 @@ startdocker:
 install_req:
 	poetry install
 
+export_env:
+	export $(grep -v '^#' .env | xargs)
 
 # Delete '.DS_Store' and '__pycache__' files.
 clean:
