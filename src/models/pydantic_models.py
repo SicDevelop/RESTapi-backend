@@ -1,5 +1,5 @@
 from database.db import Base
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, DateTime
 
 #FIXME: convert id to uuid.
 class Teachers(Base):
@@ -34,5 +34,8 @@ class Shedules(Base):
     __tablename__ = 'Shedules'
 
     id = Column(Integer, primary_key=True)
-    group_id = Column(Integer)
-    para_id = Column(Integer)
+    lesson_start = Column(Integer, default=0, nullable=False)
+    name = Column(String)
+    teacher_id = Column(Integer)
+    dt = Column(DateTime)
+

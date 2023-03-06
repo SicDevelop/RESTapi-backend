@@ -3,6 +3,8 @@
 from pydantic import BaseModel
 from typing import Union
 
+from sqlalchemy import DateTime
+
 class Teacher(BaseModel):
     first_name: Union[str, None] = None
     last_name: Union[str, None] = None
@@ -28,7 +30,20 @@ class Group(BaseModel):
     short_name: str
     full_name: str
 
+class AboutLesson(BaseModel):
+    name: str
+    teacher: str
+
+class Lessons(BaseModel):
+    zero: AboutLesson
+    one: AboutLesson
+    two: AboutLesson
+    three: AboutLesson
+    four: AboutLesson
+    five: AboutLesson
+    size: AboutLesson
+    dt: str
 
 class Shedule(BaseModel):
-    para_id: int
-    group_id: int
+    name: str
+    lessons: Lessons
