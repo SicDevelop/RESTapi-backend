@@ -16,8 +16,8 @@ user@device#: make dev
 ```
 
 ## PgAdmin:
-After running the docker compose command ... You will also get pgAdmin (web interface to the database) running. If you have worked with it before, this is a big plus. 
-The configuration data for the connection is in the .env file and you can customize it. To connect pgAdmin to PostgresSQL, use the db address, because the docker works like this
+After running the `docker compose` command, You will also get pgAdmin (web interface to the database) running. If you have worked with it before, this is a big plus. 
+The configuration data for the connection is in the `.env` file and you can customize it. To connect pgAdmin to PostgresSQL, use the db address, because the docker works like this
 
 Tested on:
 ```sh
