@@ -3,5 +3,5 @@ def error_handler(func: object) -> object:
         try:
             return await func(*args, **kwargs)
         except Exception as ex:
-            print('ex:', ex)
+            return {"Internal Server Error": 500}
     return wrapper

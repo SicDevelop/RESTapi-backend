@@ -41,8 +41,8 @@ class Lessons(BaseModel):
     three: AboutLesson
     four: AboutLesson
     five: AboutLesson
-    size: AboutLesson
-    dt: str
+    six: AboutLesson
+    dt: int
 
 class Shedule(BaseModel):
     name: str
