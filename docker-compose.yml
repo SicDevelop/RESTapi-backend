@@ -1,6 +1,8 @@
 version: '3.6'
 
 services:
+  
+  # PostgresSQL database.
   db:
     image: postgres:14.5
     restart: always
@@ -13,34 +15,104 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - ${DB_PORT}
-
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.11
+  
+  # PgAdmin connected to db.
   pgadmin:
     image: chorss/docker-pgadmin4
     ports:
       - ${PG_PORT}
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.12
+
+  # Backend from Dockerfile.
+  backend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - pgadmin
+    links:
+      - db
+    volumes:
+      - .:/application
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.13
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - ./dockerConfigFiles/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.14
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    user: "472"
+    container_name: grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - ./dockerConfigFiles/grafana/datasource.yml:/etc/grafana/provisioning/datasource.yml
+    env_file:
+      - ./dockerConfigFiles/grafana/config.monitoring
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.15
   
-  #mybot:
-    #build:
-      #context: .
-      #dockerfile: Dockerfile
-    #env_file:
-      #- .env
-    #depends_on:
-      #- db
-      #- pgadmin
-    #links:
-      #- db
-    #volumes:
-      #- .:/src
-
-
-    #command: python3 start.py
-
+  node-exporter:
+    image: prom/node-exporter
+    volumes:
+        - /proc:/host/proc:ro
+        - /sys:/host/sys:ro
+        - /:/rootfs:ro
+    command:
+        - --path.procfs=/host/proc
+        - --path.sysfs=/host/sys
+        - --collector.filesystem.ignored-mount-points
+        - ^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)
+    ports:
+        - 9100:9100
+    restart: always
+    deploy:
+        mode: global
+    networks:
+      example-network:
+        ipv4_address: 172.16.238.16
+  
+        
+networks:
+  example-network:
+    name: example-network
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
 
 volumes:
   db:
     driver: local
- #app:
-    #driver: local
+  backend:
+    driver: local
   pgadmin-data:
     

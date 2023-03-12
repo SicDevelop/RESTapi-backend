@@ -27,7 +27,7 @@ async def register(admin: Admin, db: Session = Depends(get_db)) -> dict:
     """ Создание тестового админа. Временная функция. """
     hashed_password: str = get_password_hash(admin.password)
     await crud.add_admin(username=admin.username, hashed_password=hashed_password, db=db)
-    return responses.ERROR_RESPONSES['admin_created']
+    return {'done': 'status'}
 
 @router.get('/teachers')
 async def get_teachers(db: Session = Depends(get_db)) -> dict:
