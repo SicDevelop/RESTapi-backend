@@ -32,7 +32,8 @@ The configuration data for the connection is in the `.env` file and you can cust
 ``` http://localhost:3000```
  - login: admin
  - password: pass@123
-u need to import dashboard from ```grafana``` directory.
+
+For dashboard u need to import `dashboard.json` from ```docker/ConfigFiles/grafana``` directory.
 
 ### Prometheus (PromoQL)
 ``` http://localhost:9090```
