@@ -1,3 +1,8 @@
+<div align='center'>
+  <image src='https://github.com/SicDevelop/RESTapi-backend/blob/main/docs/images/banner.png' height=500/>
+  <h1>Kingdom system</h1>
+</div>
+
 ## Requirements
   - Docker compose (or simply docker)
   - Poetry (for developer branch)
