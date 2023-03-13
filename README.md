@@ -15,9 +15,11 @@ user@device#: docker compose --env-file .env up -d
 user@device#: make dev
 ```
 ### In docker:
+```sh
 user@device#: git clone https://github.com/SicDevelop/RESTapi-backend.git
 user@device#: cd RESTapi-backend
 user@device#: docker compose --env-file .env up
+```
 
 ## Services
 
