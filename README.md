@@ -1,6 +1,6 @@
 ## Requirements
-  - Docker compose
-  - Poetry
+  - Docker compose (or simply docker)
+  - Poetry (for developer branch)
 
 ## Installation
 
