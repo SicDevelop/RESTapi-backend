@@ -29,7 +29,8 @@ user@device#: cd RESTapi-backend
 user@device#: docker compose --env-file .env up
 ```
 
-Для более подробного гайда используйте [wiki](https://github.com/SicDevelop/Kingdom-System/wiki)
+Для более подробного гайда используйте [wiki](https://github.com/SicDevelop/Kingdom-System/wiki/Добро-пожаловать-в-документацию!)
+
 Tested on:
 ```sh
 MacOS Big Sur 11.7.4
