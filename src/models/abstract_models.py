@@ -1,16 +1,26 @@
 # Okay. This is podium..
 # $-<>-$-<>-$-<>-$-<>-$-<>-$
 from pydantic import BaseModel
-from typing import Union
+from typing import Union, Any
 
 from sqlalchemy import DateTime
 
 class Teacher(BaseModel):
+    first_name: str
+    last_name: str
+    middle_name: str
+    email: str
+
+class TeacherInDB(BaseModel):
+    id: int
     first_name: Union[str, None] = None
     last_name: Union[str, None] = None
     middle_name: Union[str, None] = None
     email: Union[str, None] = None
 
+class Tokens(BaseModel):
+    access_token: str
+    refresh_token: str
 
 class Admin(BaseModel):
     username: Union[str, None] = None
