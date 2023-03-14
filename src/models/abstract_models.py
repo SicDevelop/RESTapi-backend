@@ -44,6 +44,6 @@ class Lessons(BaseModel):
     six: AboutLesson
     dt: int
 
-class Shedule(BaseModel):
+class Schedule(BaseModel):
     name: str
     lessons: Lessons
