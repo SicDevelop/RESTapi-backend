@@ -1,3 +1,11 @@
+<div align='center'>
+  <image src='https://github.com/SicDevelop/RESTapi-backend/blob/main/docs/images/banner.png' height=500/>
+  <h1>Kingdom system</h1>
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/SicDevelop/Kingdom-System?style=plastic">
+  <img alt="GitHub issues" src="https://img.shields.io/github/issues/SicDevelop/Kingdom-System?label=Issues">
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/SicDevelop/Kingdom-System">
+</div>
+
 ## Requirements
   - Docker compose (or simply docker)
   - Poetry (for developer branch)
@@ -21,27 +29,7 @@ user@device#: cd RESTapi-backend
 user@device#: docker compose --env-file .env up
 ```
 
-## Services
-
-### PgAdmin:
-After running the `docker compose` command, You will also get pgAdmin (web interface to the database) running. If you have worked with it before, this is a big plus. 
-The configuration data for the connection is in the `.env` file and you can customize it. To connect pgAdmin to PostgresSQL, use the db address, because the docker works like this
-
-
-### Grafana:
-``` http://localhost:3000```
- - login: admin
- - password: pass@123
-
-For dashboard u need to import `dashboard.json` from ```docker/ConfigFiles/grafana``` directory.
-
-### Prometheus (PromoQL)
-``` http://localhost:9090```
-I use it for Grafana service.
-
-### Node exporter
-``` http://localhost:9100```
-for prometheus
+Для более подробного гайда используйте [wiki](https://github.com/SicDevelop/Kingdom-System/wiki/Добро-пожаловать-в-документацию!)
 
 Tested on:
 ```sh
