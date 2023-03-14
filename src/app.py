@@ -1,25 +1,22 @@
-from fastapi.middleware.cors import CORSMiddleware
-from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi import FastAPI
 from models.pydantic_models import *
 from database.db import Base, engine
-from routers import public, admin
+
+from apps.v1.routers import public
+from apps.v1.routers import operator
 
 
 Base.metadata.create_all(bind=engine)
 
-app: object = FastAPI()
+app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+@app.get('/')
+async def index():
+    return {'message': 'hello'}
 
 
-app.include_router(public.router)
-app.include_router(admin.router)
+api_v1 = FastAPI()
+api_v1.include_router(public.router)
+api_v1.include_router(operator.router)
 
-Instrumentator().instrument(app).expose(app)
+app.mount("/api/v1", api_v1)
