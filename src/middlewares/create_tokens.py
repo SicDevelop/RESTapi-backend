@@ -1,9 +1,10 @@
 import time
 import jwt
 from core.config import server_settings
+from models.abstract_models import Tokens
 
-async def token_response(token: str, refresh_token: str) -> dict:
-    return {'access_token': token, 'refresh_token': refresh_token}
+async def token_response(token: str, refresh_token: str) -> Tokens:
+    return Tokens(access_token=token, refresh_token=refresh_token)
 
 async def signJWT(user_id: str) -> dict:
     payload_access: dict = {
