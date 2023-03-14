@@ -3,17 +3,19 @@ from database.db import get_db
 from sqlalchemy.orm import Session
 from middlewares.crud import CrudController
 from middlewares.create_tokens import signJWT
-from models.abstract_models import Admin
+from models.abstract_models import Admin, Tokens, TeacherInDB, Teacher
 from core.security import get_password_hash, verify_password
 from middlewares import responses
+from typing import Any, List
+
 router = APIRouter(
     prefix='/public'
 )
 
 crud = CrudController()
 
-@router.post('/login', tags=['Authorize'])
-async def login(admin: Admin, db: Session = Depends(get_db)) -> dict:
+@router.post('/login', tags=['Authorize'], response_model=Tokens)
+async def login(admin: Admin, db: Session = Depends(get_db)) -> Any:
     """ Авторизация для получения токенов """
     user: object = await crud.check_admin(username=admin.username, db=db)
     if not user:
@@ -31,20 +33,20 @@ async def register(admin: Admin, db: Session = Depends(get_db)) -> dict:
     return responses.OK_RESPONSES['admin_created']
 
 # <================== Teachers =================>
-@router.get('/teachers', tags=['Teachers'])
-async def teachers(db: Session = Depends(get_db)):
+@router.get('/teachers', tags=['Teachers'], response_model=List[TeacherInDB])
+async def teachers(db: Session = Depends(get_db)) -> Any:
     return await crud.get_teachers(db=db)
 
-@router.get('/tacher-by-id', tags=['Teachers'])
+@router.get('/tacher-by-id', tags=['Teachers'], response_model=TeacherInDB)
 async def teacher_by_id(teacher_id: int, db: Session = Depends(get_db)):
-    return await crud.get_teacher_by_id(db=db, teacher_id=str(teacher_id))
+    return await crud.get_teacher_by_id(db=db, teacher_id=teacher_id)
 
-@router.get('/teachers-by-name', tags=['Teachers'])
-async def teachers_by_name(teacher_name: str, db: Session = Depends(get_db)):
+@router.get('/teachers-by-name', tags=['Teachers'], response_model=List[TeacherInDB])
+async def teachers_by_name(teacher_name: str, db: Session = Depends(get_db)) -> Any:
     return await crud.get_teacher_by_name(db=db, teacher_name=teacher_name)
 
-@router.get('/teachers-by-last-name', tags=['Teachers'])
-async def teachers_by_last_name(teacher_last_name: str, db: Session = Depends(get_db)):
+@router.get('/teachers-by-last-name', tags=['Teachers'], response_model=List[TeacherInDB])
+async def teachers_by_last_name(teacher_last_name: str, db: Session = Depends(get_db)) -> Any:
     return await crud.get_teacher_by_last_name(db=db, teacher_last_name=teacher_last_name)
 
 
